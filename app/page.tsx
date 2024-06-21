@@ -1,3 +1,4 @@
+import PostButton from '@/components/PostButton';
 import createPost from '@/server/actions/createPost';
 import getPosts from '@/server/actions/getPosts';
 
@@ -22,7 +23,7 @@ export default async function Home() {
             name="title"
             placeholder="Title"
           />
-          <button type="submit" className='bg-blue-600 py-2 px-4 rounded-md text-white'>Submit</button>
+          <PostButton/>
         </form>
       </main>
     );
