@@ -9,10 +9,12 @@ type BackButtonType = {
 };
 export default function BackButton({ href, label }: BackButtonType) {
   return (
-    <Button className='font-medium w-full'>
-      <Link href={href} aria-label={label}>
-        {label}
-      </Link>
-    </Button>
+    <>
+      <Button variant={'link'} className="font-medium w-full" asChild>
+        <Link href={href} aria-label={label}>
+          {label}
+        </Link>
+      </Button>
+    </>
   );
 }

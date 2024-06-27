@@ -1,13 +1,15 @@
 'use client';
-import React from 'react';
 import { Button } from '@/components/ui/button';
 import { signIn } from 'next-auth/react';
-import github from 'next-auth/providers/github';
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
 
 export default function Socials() {
   return (
-    <div>
+    <div className="flex flex-col items-center w-full gap-4">
       <Button
+        variant={'outline'}
+        className="flex gap-4 w-full"
         onClick={() =>
           signIn('google', {
             redirect: false,
@@ -16,8 +18,11 @@ export default function Socials() {
         }
       >
         Sign in with Google
+        <FcGoogle className='w-5 h-5'/>
       </Button>
       <Button
+        variant={'outline'}
+        className="flex gap-4 w-full"
         onClick={() =>
           signIn('github', {
             redirect: false,
@@ -25,7 +30,8 @@ export default function Socials() {
           })
         }
       >
-        Sign in with Github
+        <p>Sign in with Github</p>
+        <FaGithub className='w-5 h-5'/>
       </Button>
     </div>
   );

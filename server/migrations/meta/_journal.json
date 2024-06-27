@@ -15,6 +15,41 @@
       "when": 1719034236849,
       "tag": "0001_watery_chimera",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1719133021059,
+      "tag": "0002_funny_santa_claus",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1719219055707,
+      "tag": "0003_mature_dark_beast",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1719219425872,
+      "tag": "0004_absent_chamber",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1719220394657,
+      "tag": "0005_huge_winter_soldier",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1719304211561,
+      "tag": "0006_ambiguous_frightful_four",
+      "breakpoints": true
     }
   ]
 }
