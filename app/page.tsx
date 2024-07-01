@@ -1,3 +1,3 @@
 export default async function Home() {
-  return <main>hello world</main>;
+  return <main>Welcome to Sprout and Scribble!</main>;
 }
