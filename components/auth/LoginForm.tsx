@@ -101,7 +101,7 @@ export default function LoginForm() {
                   )}
                 />
 
-                <Button size={'sm'} variant={'link'} asChild>
+                <Button size={'sm'} className='px-0' variant={'link'} asChild>
                   <Link href="/auth/reset">Forgot your password ?</Link>
                 </Button>
               </div>
