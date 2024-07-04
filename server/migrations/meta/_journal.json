@@ -57,6 +57,20 @@
       "when": 1719725273914,
       "tag": "0007_mean_swordsman",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1719999863691,
+      "tag": "0008_freezing_khan",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1720000555309,
+      "tag": "0009_faithful_clea",
+      "breakpoints": true
     }
   ]
 }

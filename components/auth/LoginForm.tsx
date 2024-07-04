@@ -11,6 +11,13 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form';
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from '@/components/ui/input-otp';
+
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { useAction } from 'next-safe-action/hooks';
@@ -22,8 +29,13 @@ import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import FormSuccess from './FormSuccess';
 import FormError from './FormError';
+import { Index } from 'drizzle-orm/pg-core';
 
 export default function LoginForm() {
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [showTwoFactor, setShowTwoFactor] = useState(false);
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -40,11 +52,11 @@ export default function LoginForm() {
       if (data?.data?.success) {
         setSuccess(data?.data.success);
       }
+      if (data.data?.twoFactor) {
+        setShowTwoFactor(true);
+      }
     },
   });
-
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   function onSubmit(values: z.infer<typeof LoginSchema>) {
     execute(values);
@@ -62,46 +74,86 @@ export default function LoginForm() {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div>
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="email"
-                          type="email"
-                          autoComplete="email"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="********"
-                          type="password"
-                          autoComplete="current-password"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormDescription />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {showTwoFactor && (
+                  <FormField
+                    control={form.control}
+                    name="code"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          We&apos;ve sent you a two factor code to your email.
+                        </FormLabel>
+                        <FormControl>
+                          <InputOTP
+                            disabled={status === 'executing'}
+                            maxLength={6}
+                            {...field}
+                          >
+                            <InputOTPGroup>
+                              <InputOTPSlot index={0} />
+                              <InputOTPSlot index={1} />
+                              <InputOTPSlot index={2} />
+                            </InputOTPGroup>
+                            <InputOTPSeparator />
+                            <InputOTPGroup>
+                              <InputOTPSlot index={3} />
+                              <InputOTPSlot index={4} />
+                              <InputOTPSlot index={5} />
+                            </InputOTPGroup>
+                          </InputOTP>
+                        </FormControl>
+                        <FormDescription />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+                {!showTwoFactor && (
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="email"
+                              type="email"
+                              autoComplete="email"
+                              disabled={status === 'executing'}
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Password</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="********"
+                              type="password"
+                              autoComplete="current-password"
+                              disabled={status === 'executing'}
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </>
+                )}
 
-                <Button size={'sm'} className='px-0' variant={'link'} asChild>
+                <Button size={'sm'} className="px-0" variant={'link'} asChild>
                   <Link href="/auth/reset">Forgot your password ?</Link>
                 </Button>
               </div>
@@ -114,7 +166,7 @@ export default function LoginForm() {
                   status === 'executing' ? 'animate-pulse' : ''
                 )}
               >
-                {'Login'}
+                {showTwoFactor ? 'Verify' : 'Login'}
               </Button>
             </form>
           </Form>
