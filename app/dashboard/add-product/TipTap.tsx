@@ -7,6 +7,7 @@ import { Toggle } from '@/components/ui/toggle';
 import { Bold, Italic, List, ListOrdered, Strikethrough } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useFormContext } from 'react-hook-form';
+import { useEffect } from 'react';
 
 const Tiptap = ({ val }: { val: string }) => {
   const { setValue } = useFormContext();
@@ -46,6 +47,11 @@ const Tiptap = ({ val }: { val: string }) => {
     content: val,
   });
 
+  useEffect(() => {
+    if (editor?.isEmpty) {
+      editor.commands.setContent(val);
+    }
+  }, [val]);
   return (
     <div className="flex flex-col gap-2">
       {editor && (
@@ -53,24 +59,12 @@ const Tiptap = ({ val }: { val: string }) => {
           <Toggle
             pressed={editor.isActive('bold')}
             onPressedChange={() => {
-              console.log('bold clicked');
               editor.chain().focus().toggleBold().run();
             }}
             size="sm"
           >
             <Bold className="h-4 w-4" />
           </Toggle>
-          {/* <Button
-            // pressed={editor.isActive('bold')}
-            onClick={e => {
-              e.preventDefault();
-              console.log('bold clicked');
-              editor.chain().focus().toggleBold().run();
-            }}
-            size="sm"
-          >
-            <Bold className="h-4 w-4" />
-          </Button> */}
           <Toggle
             pressed={editor.isActive('italic')}
             onPressedChange={() => editor.chain().focus().toggleItalic().run()}
