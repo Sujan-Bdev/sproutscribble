@@ -8,7 +8,14 @@ import { products, productVariants } from '../schema';
 import { db } from '..';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
+import algoliaSearch from 'algoliasearch';
 
+const client = algoliaSearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_ID!,
+  process.env.ALGOLIA_ADMIN!
+);
+
+const algoliaIndex = client.initIndex('products');
 const actionClient = createSafeActionClient();
 
 export const deleteVariant = actionClient
@@ -30,6 +37,7 @@ export const deleteVariant = actionClient
         .where(eq(productVariants.id, id))
         .returning();
       revalidatePath('/dashboard/products');
+      algoliaIndex.deleteObject(deletedVariant[0].id.toString());
       return {
         success: `Variant ${deletedVariant[0].productType} has been deleted`,
       };
