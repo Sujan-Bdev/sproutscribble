@@ -11,11 +11,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { MoreHorizontal } from 'lucide-react';
+import { MoreHorizontal, PlusCircle } from 'lucide-react';
 import { useAction } from 'next-safe-action/hooks';
 import { deleteProduct } from '@/server/actions/deleteProduct';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { VariantsWithImagesTags } from '@/lib/infer-type';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import {ProductVariant} from './ProductVariant';
+
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Product = {
@@ -23,7 +32,7 @@ export type Product = {
   title: string;
   price: number;
   image: string;
-  variants: any;
+  variants: VariantsWithImagesTags[];
 };
 
 const ActionCell = ({ row }: { row: Row<Product> }) => {
@@ -75,6 +84,53 @@ export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: 'variants',
     header: 'Variants',
+    cell: ({ row }) => {
+      const variants = row.getValue('variants') as VariantsWithImagesTags[];
+      console.log('variants data')
+      console.log(variants)
+      return (
+        <div className="flex gap-2 ">
+          {variants.map(variant => (
+            <div key={variant.id} className="">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <ProductVariant
+                      productID={variant.productID}
+                      variant={variant}
+                      editMode={true}
+                    >
+                      <div
+                        className="w-5 h-5 rounded-full"
+                        key={variant.id}
+                        style={{ background: variant.color }}
+                      />
+                    </ProductVariant>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p> {variant.productType}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+          ))}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span>
+                  <ProductVariant productID={row.original.id} editMode={false}>
+                      <PlusCircle className="w-5 h-5 cursor-pointer" />
+                  </ProductVariant>
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Create a new product variant</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'price',

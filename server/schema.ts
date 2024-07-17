@@ -1,6 +1,6 @@
 import { createId } from '@paralleldrive/cuid2';
 import { timeStamp } from 'console';
-import { relations } from 'drizzle-orm';
+import { InferSelectModel, relations } from 'drizzle-orm';
 import {
   boolean,
   timestamp,
@@ -144,7 +144,7 @@ export const variantTags = pgTable('variantTags', {
 });
 
 export const productRelations = relations(products, ({ many }) => ({
-  productsVariants: many(productVariants, {
+  productVariants: many(productVariants, {
     relationName: 'productVariants',
   }),
 }));
@@ -177,3 +177,5 @@ export const variantTagsRelations = relations(variantTags, ({ one }) => ({
     relationName: 'variantTags',
   }),
 }));
+
+export type Products = InferSelectModel<typeof products>;
