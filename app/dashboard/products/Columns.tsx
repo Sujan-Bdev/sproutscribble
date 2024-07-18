@@ -1,29 +1,27 @@
 'use client';
 
-import { ColumnDef, Row } from '@tanstack/react-table';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, PlusCircle } from 'lucide-react';
-import { useAction } from 'next-safe-action/hooks';
-import { deleteProduct } from '@/server/actions/deleteProduct';
-import { toast } from 'sonner';
-import Link from 'next/link';
-import { VariantsWithImagesTags } from '@/lib/infer-type';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import {ProductVariant} from './ProductVariant';
+import { VariantsWithImagesTags } from '@/lib/infer-type';
+import { deleteProduct } from '@/server/actions/deleteProduct';
+import { ColumnDef, Row } from '@tanstack/react-table';
+import { MoreHorizontal, PlusCircle } from 'lucide-react';
+import { useAction } from 'next-safe-action/hooks';
+import Image from 'next/image';
+import Link from 'next/link';
+import { toast } from 'sonner';
+import { ProductVariant } from './ProductVariant';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
