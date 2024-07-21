@@ -17,23 +17,17 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { createProduct } from '@/server/actions/createProduct';
+import { getProduct } from '@/server/actions/getProduct';
 import { ProductSchema, zProductSchema } from '@/types/productSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DollarSign } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Tiptap from './TipTap';
 import { useAction } from 'next-safe-action/hooks';
-import { createProduct } from '@/server/actions/createProduct';
-import FormSuccess from '@/components/auth/FormSuccess';
-import FormError from '@/components/auth/FormError';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { db } from '@/server';
-import { eq } from 'drizzle-orm';
-import { products } from '@/server/schema';
-import { getProduct } from '@/server/actions/getProduct';
-import { revalidatePath } from 'next/cache';
+import Tiptap from './TipTap';
 
 export default function ProductForm() {
   const form = useForm<zProductSchema>({

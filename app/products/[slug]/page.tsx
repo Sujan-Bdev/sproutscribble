@@ -8,6 +8,7 @@ import formatPrice from '@/lib/formatPrice';
 import ProductPick from '@/components/products/ProductPick';
 import Image from 'next/image';
 import ProductShowCase from '@/components/products/ProductShowCase';
+import Reviews from '@/components/reviews/Reviews';
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
@@ -82,6 +83,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </section>
+        <Reviews productID={variant.productID} />
       </main>
     );
   }

@@ -856,6 +856,27 @@
     aria-hidden "^1.1.1"
     react-remove-scroll "2.5.7"
 
+"@radix-ui/react-popover@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-popover/-/react-popover-1.1.1.tgz#604b783cdb3494ed4f16a58c17f0e81e61ab7775"
+  integrity sha512-3y1A3isulwnWhvTTwmIreiB8CF4L+qRjZnK1wYLO7pplddzXKby/GnZ2M7OZY3qgnl6p9AodUIHRYGXNah8Y7g==
+  dependencies:
+    "@radix-ui/primitive" "1.1.0"
+    "@radix-ui/react-compose-refs" "1.1.0"
+    "@radix-ui/react-context" "1.1.0"
+    "@radix-ui/react-dismissable-layer" "1.1.0"
+    "@radix-ui/react-focus-guards" "1.1.0"
+    "@radix-ui/react-focus-scope" "1.1.0"
+    "@radix-ui/react-id" "1.1.0"
+    "@radix-ui/react-popper" "1.2.0"
+    "@radix-ui/react-portal" "1.1.1"
+    "@radix-ui/react-presence" "1.1.0"
+    "@radix-ui/react-primitive" "2.0.0"
+    "@radix-ui/react-slot" "1.1.0"
+    "@radix-ui/react-use-controllable-state" "1.1.0"
+    aria-hidden "^1.1.1"
+    react-remove-scroll "2.5.7"
+
 "@radix-ui/react-popper@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-popper/-/react-popper-1.2.0.tgz#a3e500193d144fe2d8f5d5e60e393d64111f2a7a"
@@ -909,6 +930,13 @@
     "@radix-ui/react-primitive" "2.0.0"
     "@radix-ui/react-use-callback-ref" "1.1.0"
     "@radix-ui/react-use-controllable-state" "1.1.0"
+
+"@radix-ui/react-separator@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-separator/-/react-separator-1.1.0.tgz#ee0f4d86003b0e3ea7bc6ccab01ea0adee32663e"
+  integrity sha512-3uBAs+egzvJBDZAzvb/n4NxxOYpnspmWxO2u5NbZ8Y6FM/NdrGSF9bop3Cf6F6C71z1rTSn8KV0Fo2ZVd79lGA==
+  dependencies:
+    "@radix-ui/react-primitive" "2.0.0"
 
 "@radix-ui/react-slot@1.1.0", "@radix-ui/react-slot@^1.1.0":
   version "1.1.0"
@@ -1282,15 +1310,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
-  version "18.3.3"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.3.3.tgz"
-  integrity sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^3.0.2"
-
-"@types/react@^18.3.3":
+"@types/react@*", "@types/react@^18.3.3":
   version "18.3.3"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.3.tgz#9679020895318b0915d7a3ab004d92d33375c45f"
   integrity sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==
@@ -2076,6 +2096,29 @@ effect@3.4.5:
   version "3.4.5"
   resolved "https://registry.yarnpkg.com/effect/-/effect-3.4.5.tgz#f1e2624271a082a7c99d42414c542af5879f011f"
   integrity sha512-aTonOH68tUttSdYwMkiuky3hjgn3pu7yInNaE8rU2EDKQ8zr9Me78WcvWBQKe4u1gvbBH77y9dAKqn98lNIfNQ==
+
+embla-carousel-autoplay@^8.1.6:
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/embla-carousel-autoplay/-/embla-carousel-autoplay-8.1.6.tgz#24696cb6037bbb3e894f51a8bcf6698c81ea38cf"
+  integrity sha512-e5n9f4q+DVeBPiPPT3gwzqpiqfae8aP8fQACS4OZkPFvFLdsVhnWcw+cwtewryP7snWJGKPXEMA1GOjieEKv+w==
+
+embla-carousel-react@^8.1.6:
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/embla-carousel-react/-/embla-carousel-react-8.1.6.tgz#4de0cef2888443f4203408df73af2707e5c961e9"
+  integrity sha512-DHxwFzF63yVrU95Eo58E9Xr5b6Y9ul6TTsqb/rtwMi+jXudAmIqN1i9iBxQ73i8jKuUVxll/ziNYMmnWvrdQJQ==
+  dependencies:
+    embla-carousel "8.1.6"
+    embla-carousel-reactive-utils "8.1.6"
+
+embla-carousel-reactive-utils@8.1.6:
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/embla-carousel-reactive-utils/-/embla-carousel-reactive-utils-8.1.6.tgz#51c4a1dc6df1e608e9480f7a5fc3328e95926f91"
+  integrity sha512-Wg+J2YoqLqkaqsXi7fTJaLmXm6BpgDRJ0EfTdvQ4KE/ip5OsUuKGpJsEQDTt4waGXSDyZhIBlfoQtgGJeyYQ1Q==
+
+embla-carousel@8.1.6:
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-8.1.6.tgz#a67f0b51f0cb51131299c47dff18e2d08165d44a"
+  integrity sha512-9n7FVsbPAs1KD+JmO84DnEDOZMXPBQbLujjMQqvsBRN2CDWwgZ9hRSNapztdPnyJfzOIxowGmj0BUQ8ACYAPkA==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
