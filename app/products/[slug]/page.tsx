@@ -9,6 +9,9 @@ import ProductPick from '@/components/products/ProductPick';
 import Image from 'next/image';
 import ProductShowCase from '@/components/products/ProductShowCase';
 import Reviews from '@/components/reviews/Reviews';
+import { getReviewAverage } from '@/lib/reviewAverage';
+import Stars from '@/components/reviews/Stars';
+import AddCart from '@/components/cart/AddCart';
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
@@ -37,6 +40,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     with: {
       product: {
         with: {
+          reviews: true,
           productVariants: {
             with: {
               variantImages: true,
@@ -47,27 +51,36 @@ export default async function Page({ params }: { params: { slug: string } }) {
       },
     },
   });
+  console.log(variant)
   if (variant) {
+    const reviewAverage = getReviewAverage(
+      variant?.product.reviews.map(r => r.rating)
+    );
+
     return (
       <main>
-        <section className='flex flex-col lg:flex-row gap-4 lg:gap-12'>
+        <section className="flex flex-col lg:flex-row gap-4 lg:gap-12">
           <div className="flex-1">
-            <ProductShowCase variants = {variant.product.productVariants} />
+            <ProductShowCase variants={variant.product.productVariants} />
           </div>
           <div className="flex flex-col flex-1">
             <h2 className="text-2xl font-bold">{variant?.product.title}</h2>
             <div>
               <ProductType variants={variant?.product.productVariants} />
+              <Stars rating={reviewAverage} totalReviews={variant.product.reviews.length} />
             </div>
-            <Separator className='my-2' />
+            <Separator className="my-2" />
             <p className="text-2xl font-medium py-2">
               {formatPrice(variant.product.price)}
             </p>
             <div
               dangerouslySetInnerHTML={{ __html: variant.product.description }}
             ></div>
-            <p className="text-secondary-foreground font-medium my-2 ">Available Colors</p>
-            <div className='flex gap-2'>
+            <p className="text-secondary-foreground font-medium my-2 ">
+              Available Colors
+            </p>
+
+            <div className="flex gap-2">
               {variant.product.productVariants.map(productVariant => (
                 <ProductPick
                   key={productVariant.id}
@@ -81,6 +94,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 />
               ))}
             </div>
+            <AddCart />
           </div>
         </section>
         <Reviews productID={variant.productID} />
