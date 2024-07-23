@@ -9,8 +9,6 @@ export default async function DashboardLayout({
 }) {
   const session = await auth();
 
-  
-
   const userLinks = [
     {
       label: 'Orders',
