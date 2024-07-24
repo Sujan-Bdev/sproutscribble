@@ -24,8 +24,6 @@ export const settings = actionClient
         isTwoFactorEnabled,
       },
     }) => {
-      console.log(`the form values from onSubmit are:`);
-      //   console.log(parsedInput);
       const user = await auth();
 
       if (!user) {

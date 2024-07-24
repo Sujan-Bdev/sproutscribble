@@ -16,7 +16,6 @@ export const emailRegister = actionClient
   .action(async ({ parsedInput: { email, password, name } }) => {
     //  hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
 
     // check existing user
     const existingUser = await db.query.users.findFirst({

@@ -17,7 +17,6 @@ export default async function Products() {
     },
     orderBy: (products, { desc }) => [desc(products.id)]
   });
-  console.log(`Product data: ${products}`)
 
   if (!products) throw new Error('No Products found');
 

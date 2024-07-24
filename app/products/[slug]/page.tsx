@@ -51,7 +51,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
       },
     },
   });
-  console.log(variant)
   if (variant) {
     const reviewAverage = getReviewAverage(
       variant?.product.reviews.map(r => r.rating)

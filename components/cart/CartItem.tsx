@@ -18,9 +18,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import emptyCart from '@/public/emptybox.json';
 import { createId } from '@paralleldrive/cuid2';
+import { Button } from '../ui/button';
 
 export default function CartItem() {
-  const { cart, addToCart, removeFromCart } = useCartStore();
+  const { cart, addToCart, removeFromCart, setCheckOutProgress } =
+    useCartStore();
   const totalPrice = React.useMemo(() => {
     return cart.reduce((acc, item) => {
       return acc + item.price! * item.variant.quantity;
@@ -36,7 +38,11 @@ export default function CartItem() {
     });
   }, [totalPrice]);
   return (
-    <motion.div animate={{}} initial={{}}>
+    <motion.div
+      animate={{}}
+      initial={{}}
+      className="flex flex-col items-center py-2"
+    >
       {cart.length === 0 && (
         <div className="flex flex-col w-full items-center justify-center">
           <motion.div
@@ -53,8 +59,8 @@ export default function CartItem() {
         </div>
       )}
       {cart.length > 0 && (
-        <div>
-          <Table>
+        <div className="overflow-y-auto h-88 w-full">
+          <Table className="max-w-2xl mx-auto">
             <TableHeader>
               <TableRow>
                 <TableHead className="">Product</TableHead>
@@ -121,7 +127,7 @@ export default function CartItem() {
       )}
       <motion.div className="flex items-center justify-center relative overflow-hidden my-4">
         <span className="text-md">Total: $</span>
-        <AnimatePresence mode='popLayout' >
+        <AnimatePresence mode="popLayout">
           {priceInLetters.map((letter, index) => (
             <motion.div key={letter.id}>
               <motion.span
@@ -137,6 +143,13 @@ export default function CartItem() {
           ))}
         </AnimatePresence>
       </motion.div>
+      <Button
+        className="max-w-md w-full"
+        disabled={cart.length === 0}
+        onClick={() => setCheckOutProgress('payment-page')}
+      >
+        Checkout
+      </Button>
     </motion.div>
   );
 }

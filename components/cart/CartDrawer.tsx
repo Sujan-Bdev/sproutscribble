@@ -1,27 +1,23 @@
 'use client';
 
-import React from 'react';
-import { useCartStore } from '../../lib/clientStore';
-import { ShoppingBag } from 'lucide-react';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
+  DrawerTrigger
 } from '@/components/ui/drawer';
-import { Button } from '@/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ShoppingBag } from 'lucide-react';
+import { useCartStore } from '../../lib/clientStore';
 import CartItem from './CartItem';
+import CartMessage from './CartMessage';
+import Payment from './Payment';
 
 export default function CartDrawer() {
-  const { cart } = useCartStore();
+  const { cart, checkOutProgress } = useCartStore();
   return (
     <Drawer>
-      <DrawerTrigger >
+      <DrawerTrigger>
         <div className="relative px-2">
           <AnimatePresence>
             {cart.length > 0 && (
@@ -35,23 +31,17 @@ export default function CartDrawer() {
               </motion.span>
             )}
           </AnimatePresence>
-        <ShoppingBag />
+          <ShoppingBag />
         </div>
       </DrawerTrigger>
-      <DrawerContent className='min-h-50vh'>
+      <DrawerContent className="min-h-50vh">
         <DrawerHeader>
-          <h1>Cart Progress</h1>
+          <CartMessage />
         </DrawerHeader>
-        <div className='overflow-auto p-4'>
-
+        <div className="overflow-auto p-4">
+          {checkOutProgress === 'cart-page' && <CartItem />}
+          {checkOutProgress === 'payment-page' && <Payment />}
         </div>
-        <CartItem />
-        {/* <DrawerFooter>
-          <Button>Submit</Button>
-          <DrawerClose>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter> */}
       </DrawerContent>
     </Drawer>
   );
