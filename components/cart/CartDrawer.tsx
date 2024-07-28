@@ -12,11 +12,12 @@ import { useCartStore } from '../../lib/clientStore';
 import CartItem from './CartItem';
 import CartMessage from './CartMessage';
 import Payment from './Payment';
+import OrderConfirmed from './OrderConfirmed';
 
 export default function CartDrawer() {
-  const { cart, checkOutProgress } = useCartStore();
+  const { cart, checkOutProgress,cartOpen,setCartOpen } = useCartStore();
   return (
-    <Drawer>
+    <Drawer open={cartOpen} onOpenChange={setCartOpen}>
       <DrawerTrigger>
         <div className="relative px-2">
           <AnimatePresence>
@@ -34,13 +35,14 @@ export default function CartDrawer() {
           <ShoppingBag />
         </div>
       </DrawerTrigger>
-      <DrawerContent className="min-h-50vh">
+      <DrawerContent className="fixed bottom-0 left-0 max-h-[70vh] min-h-[50vh]">
         <DrawerHeader>
           <CartMessage />
         </DrawerHeader>
         <div className="overflow-auto p-4">
           {checkOutProgress === 'cart-page' && <CartItem />}
           {checkOutProgress === 'payment-page' && <Payment />}
+          {checkOutProgress === 'confirmation-page' && <OrderConfirmed />}
         </div>
       </DrawerContent>
     </Drawer>

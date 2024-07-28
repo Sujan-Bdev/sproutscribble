@@ -10,7 +10,7 @@ import {
   real,
   serial,
   text,
-  timestamp
+  timestamp,
 } from 'drizzle-orm/pg-core';
 import type { AdapterAccountType } from 'next-auth/adapters';
 
@@ -27,6 +27,7 @@ export const users = pgTable('user', {
   image: text('image'),
   twoFactorEnabled: boolean('twoFactorEnabled').default(false),
   role: RoleEnum('roles').default('user'),
+  customerID: text('customerID'),
 });
 
 export const accounts = pgTable(
@@ -149,7 +150,7 @@ export const productRelations = relations(products, ({ many }) => ({
   reviews: many(reviews, {
     relationName: 'product_reviews',
   }),
-  orderProduct: many(orderProduct,{relationName:'products'})
+  orderProduct: many(orderProduct, { relationName: 'products' }),
 }));
 
 export const productVariantsRelations = relations(
@@ -243,7 +244,7 @@ export const ordersRelations = relations(orders, ({ one, many }) => ({
     references: [users.id],
     relationName: 'user_orders',
   }),
-  orderProduct:many(orderProduct,{relationName:'orderProduct'})
+  orderProduct: many(orderProduct, { relationName: 'orderProduct' }),
 }));
 
 export const orderProduct = pgTable('orderProduct', {

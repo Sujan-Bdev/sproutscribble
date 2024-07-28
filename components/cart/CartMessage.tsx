@@ -8,7 +8,11 @@ import { ArrowLeft } from 'lucide-react';
 export default function CartMessage() {
   const { checkOutProgress, setCheckOutProgress } = useCartStore();
   return (
-    <motion.div animate={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: 10 }} className='text-center'>
+    <motion.div
+      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, x: 10 }}
+      className="text-center"
+    >
       <DrawerTitle>
         {checkOutProgress === 'cart-page' ? 'Your Cart Items' : null}
         {checkOutProgress === 'payment-page' ? 'Choose a payment method' : null}
@@ -25,7 +29,9 @@ export default function CartMessage() {
             Head back to cart
           </span>
         ) : null}
-        {checkOutProgress === 'confirmation-page' ? 'Order Confirmed' : null}
+        {checkOutProgress === 'confirmation-page'
+          ? 'You will received an email with your receipt!'
+          : null}
       </DrawerDescription>
     </motion.div>
   );

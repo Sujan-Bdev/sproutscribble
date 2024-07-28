@@ -16,7 +16,7 @@ export default function Payment() {
   }, 0);
 
   return (
-    <motion.div>
+    <motion.div className="max-w-2xl mx-auto">
       <Elements
         stripe={stripe}
         options={{
