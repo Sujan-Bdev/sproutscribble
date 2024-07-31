@@ -17,7 +17,7 @@ import { toast } from 'sonner';
 export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
   const stripe = useStripe();
   const elements = useElements();
-  const { cart, setCheckOutProgress,clearCart } = useCartStore();
+  const { cart, setCheckOutProgress, clearCart } = useCartStore();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -30,8 +30,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
         setIsLoading(false);
         toast.success(data.data.success);
         setCheckOutProgress('confirmation-page');
-            clearCart();
-
+        clearCart();
       }
     },
   });
@@ -85,6 +84,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
         execute({
           status: 'pending',
           total: totalPrice,
+          paymentIntentID: data.data.success.paymentIntentID,
           products: cart.map(item => ({
             productID: item.id,
             quantity: item.variant.quantity,

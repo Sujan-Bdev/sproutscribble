@@ -13,6 +13,7 @@ import { getReviewAverage } from '@/lib/reviewAverage';
 import Stars from '@/components/reviews/Stars';
 import AddCart from '@/components/cart/AddCart';
 
+export const revalidate = 60
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
   const data = await db.query.productVariants.findMany({
