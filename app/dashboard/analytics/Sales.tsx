@@ -21,6 +21,7 @@ import Image from 'next/image';
 import placeholderUser from '@/public/placeholder-user.png';
 
 export default function Sales({ totalOrders }: { totalOrders: TotalOrders[] }) {
+  const sliced = totalOrders.slice(0, 8);
   return (
     <Card>
       <CardHeader>
@@ -39,7 +40,7 @@ export default function Sales({ totalOrders }: { totalOrders: TotalOrders[] }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {totalOrders.map(order => (
+            {sliced.map(order => (
               <TableRow key={order.id} className="font-medium">
                 <TableCell className="">
                   {order.order.user.image && order.order.user.name ? (

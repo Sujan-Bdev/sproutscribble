@@ -38,7 +38,7 @@ export default async function Analytics() {
     );
   }
   return (
-    <Card>
+    <Card >
       <CardHeader>
         <CardTitle>Your Analytics</CardTitle>
         <CardDescription>

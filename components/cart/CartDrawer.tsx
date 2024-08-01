@@ -13,6 +13,7 @@ import CartItem from './CartItem';
 import CartMessage from './CartMessage';
 import Payment from './Payment';
 import OrderConfirmed from './OrderConfirmed';
+import CartProgress from './CartProgress';
 
 export default function CartDrawer() {
   const { cart, checkOutProgress,cartOpen,setCartOpen } = useCartStore();
@@ -39,6 +40,7 @@ export default function CartDrawer() {
         <DrawerHeader>
           <CartMessage />
         </DrawerHeader>
+        <CartProgress />
         <div className="overflow-auto p-4">
           {checkOutProgress === 'cart-page' && <CartItem />}
           {checkOutProgress === 'payment-page' && <Payment />}

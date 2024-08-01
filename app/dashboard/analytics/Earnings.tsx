@@ -1,30 +1,27 @@
 'use client';
 
-import { TotalOrders } from '@/lib/infer-type';
-import React, { useMemo } from 'react';
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { TotalOrders } from '@/lib/infer-type';
 import { cn } from '@/lib/utils';
-import { weeklyChart } from './weeklyChart';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useMemo } from 'react';
 import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  BarChart,
-  Bar,
-  ResponsiveContainer,
 } from 'recharts';
 import { monthlyChart } from './monthlyChart';
+import { weeklyChart } from './weeklyChart';
 
 export default function Earnings({
   totalOrders,
@@ -100,7 +97,7 @@ export default function Earnings({
         <ResponsiveContainer width="100%" height="100%">
           <BarChart width={150} height={40} data={activeChart}>
             <Tooltip
-              content={(props: { payload: any[] }) => (
+              content={props => (
                 <div>
                   {props.payload?.map(item => {
                     return (
